@@ -4,7 +4,7 @@ from agent_langchain import agent, to_text
 def chat(message, history):
     if message.strip().lower() in {"bye" , "quit" , "exit"}:
         return " a google bye string"
-
+    
     reply = agent(message, history)
     return to_text(reply)
 

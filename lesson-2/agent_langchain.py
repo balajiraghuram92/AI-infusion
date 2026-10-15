@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 
 load_dotenv()
-prices =  {"shoes": 799, "hat": 399, "bag": 1420, "shorts": 1299, "pants": 1699}
+prices =  {"shoes": 799, "hat": 399, "bag": 1420, "shorts": 1299, "pants": 1699, "iphone": 999}
 
 """" GOOGLE API MODEL
 from google import genai
@@ -43,6 +43,7 @@ model = ChatOpenAI(
     reasoning_effort="none",      # thinking off: faster, and avoids tool-loop issues
     temperature=0.3,
 ) 
+#""""
 
 @tool
 def get_price(item : str) -> str:
@@ -65,6 +66,10 @@ def convert_history(history):
             messages.append(HumanMessage(text))
         elif turn["role"] == "assistant":
             messages.append(AIMessage(text))
+        
+    ai_instruct = "only provide cost of items you can find through tool call, if you do not get the price of any item, return price of an item is not found or out of stock message to user"
+    messages.append(ai_instruct)
+
     return messages
 
 
