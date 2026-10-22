@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-import datatime
+import datetime
 
 app = FastAPI(title="Deskbuddy Tools")
 
@@ -15,6 +15,6 @@ def calculator(c: Calc):
         return {"error" : str(e)}
 
 
-@app.get("/datatime")
-def now():
-    return {"now": datatime.datatime.now().isoformat()}
+@app.get("/datetime")
+def get_datetime():
+    return {"result": datetime.datetime.now().isoformat()}
